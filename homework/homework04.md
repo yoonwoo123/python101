@@ -5,7 +5,7 @@
 1. Python에서 사용할 수 없는 식별자(예약어)를 찾아 작성하세요.
 
    ```python
-   
+   False, None, True, and 등이 있다.
    ```
 
 
@@ -21,12 +21,13 @@
    ​			  b = 0.3
 
    ```python
-   
+   import math
+   math.isclose(a, b) 
    ```
-
+  python 3.5 부터 
 
 3. 이스케이프 문자열 중 1) 줄바꿈 2) 탭 3) \ 을 작성하세요.
-
+\n , \t, \\
 
 
 
