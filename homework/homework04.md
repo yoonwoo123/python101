@@ -23,8 +23,12 @@
    ```python
    import math
    math.isclose(a, b) 
+   # 혹은
+   a = 0.1 * 3
+   b = 0.3
+   abs(a-b) < 1e-5
    ```
-  python 3.5 부터 
+     python 3.5 부터 
 
 3. 이스케이프 문자열 중 1) 줄바꿈 2) 탭 3) \ 을 작성하세요.
 \n , \t, \\
@@ -47,3 +51,10 @@ print(f'안녕, {name}야')
     5) int(‘3.5’)
 
     int('3.5') 입니다. int 안의 수는 정수여야 하기 때문입니다.
+
+6. 변경할 수 있는 (mutable) 것과 변경 불가능한 것 (immutable)을 분류하시오.
+
+String, Tuple, Range = immutable
+
+
+list, set, dic = mutable

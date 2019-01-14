@@ -25,3 +25,8 @@ href 가 아닌 src이며 들어가는 입력값도 .jpg로 들어가야한다.
 * 당신은 현재 Resume.html에서 작업중이다. "내사진" 이라는 링크를 누르면 Image 폴더 안에 my_photo를 
 
   띄워주는 a 태그 경로를 넣으시오.
+
+```html
+../image/my_photo.png
+```
+

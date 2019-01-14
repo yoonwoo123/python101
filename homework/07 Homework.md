@@ -17,10 +17,6 @@ x = 3
 ```
 
 ```python
-type(x) == int
-```
-
-```python
 isinstance(x, int)
 ```
 

@@ -25,6 +25,9 @@
    for i in my_list:
        print(f'{index} : {i}')
        index += 1
+       #혹은
+   for idx, value in enumerate(my_list):
+       print(idx, value)
    ```
 
 
