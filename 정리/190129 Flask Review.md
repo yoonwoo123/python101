@@ -225,13 +225,13 @@ SELECT * FROM  _table_ ORDER BY 값 ASC/ DESC (오름, 내림)
 
 
 
+---
 
+### csv 데이터 가져오기
 
+.mode csv
 
-
-
-
-
+.import boxoffice.csv movies
 
 
 
