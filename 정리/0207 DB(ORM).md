@@ -261,9 +261,42 @@ def create_user():
 {% endblock %}
 ```
 
+사이트에는 이렇게 나와있으나
+
+```html
+<!-- index.html -->
+
+{% extends 'base.html' %}
+{% block body %}
+    <h1 class="text-center">회원 명부</h1>
+     <!--<a href="/users/new">가입하기</a>-->
+     <hr>
+    {% for user in users %}
+        <p>{{user.id}} : {{user.username}} </p>
+        <p>{{user.email}}</p>
+        <a href="/users/read/{{user.id}}">상세보기  </a> &nbsp;
+        <a href="/users/delete/{{user.id}}">삭제하기  </a> &nbsp;
+        <a href="/users/edit/{{user.id}}">수정하기  </a> &nbsp;
+        <hr>
+    {% endfor %}
+{% endblock %}
+```
+
+이렇게 `{% extends 'base.html' % }  ` , `{% block body %}` 를 선언해주면 
+
+index.html의 `{% block body %}`  에서부터 `{% endblock %}` 까지 적혀있는 코딩이 
+
+base.html 에 들어가서 적용된다.
 
 
+```html
+<!-- base.html -->
 
+{% block body %}
+{% endblock %} 
+```
+
+`{% block body %}` 의 body는 변수이름이므로 마음대로 설정해도 된다.
 
 
 
