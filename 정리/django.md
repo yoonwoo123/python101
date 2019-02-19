@@ -200,7 +200,7 @@ def dinner(request):
 
  * Template을 리턴하려면, `render`를 사용해야 한다.
 
-    * request` (필수)
+    * `request` (필수)
     * `template` 파일 이름 (필수)
     * `template 변수 (선택) ` : `dictionary` 타입으로 구성해야 한다
 
