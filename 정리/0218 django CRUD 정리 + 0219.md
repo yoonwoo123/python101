@@ -192,9 +192,9 @@
          Board.objects.filter(title__contains='번글')
          #=> <QuerySet [<Board: 2: 2번글>, <Board: 3: 3번글>]>
          ```
-       
+      
          * 데이터베이스에서 찾았을 때, 결과가 하나이더라도 리턴값은 QuerySet이다.
-       
+      
            결과가 없어도 비어있는 QuerySet을 리턴한다!!
 
 3. CRUD - D
@@ -233,7 +233,7 @@
 6. 장고에 id 만들기 > id를 admin으로 하여서 `admin/` 을 붙이면 Django 사이트로 이동된다.
 
    ```bash
-    $ python manage.py createsuperuse
+    $ python manage.py createsuperuser
    ```
 
 
