@@ -1,22 +1,23 @@
 import sys
 sys.stdin = open("배열최소합_input.txt")
-testcases = int(input())
-def process_solution(a, k): # 답을 출력하는 단계
-    global my_min
 
-    res = 0
+def process_solution(a, k, sum): # 답을 출력하는 단계
+    global min
 
-    for i in range(1, k+1): # i = [1,2,3]
-        if a[i]:
-            res += table[i-1][data[a[i]]-1] # 12, 9, 8
-            total.append(res)
-    if total[-1] < res:
-        return
-    else:
-        total[-1] = res
-        return total[-1]
-            # if table[i-1][data[a[i]]-1] < my_min:
-            #     my_min = table[i-1][data[a[i]]-1]
+    if sum > min: return
+    # res = 0
+
+    # for i in range(1, k+1): # i = [1,2,3]
+    #     if a[i]:
+    #         res += table[i-1][data[a[i]]-1] # 12, 9, 8
+    #         total.append(res)
+    # if total[-1] < res:
+    #     return
+    # else:
+    #     total[-1] = res
+    #     return total[-1]
+    #         # if table[i-1][data[a[i]]-1] < my_min:
+    #         #     my_min = table[i-1][data[a[i]]-1]
 
 
 def make_candidates(a, k, input, c):
@@ -33,12 +34,19 @@ def make_candidates(a, k, input, c):
             ncands += 1 # ncands = 1 , 2 , 3 /
     return ncands # 3 / 2 / 1
 
-def backtrack(a, k, input): # a=선택집합, k=선택한 수, input = 모든선택수
+def backtrack(a, k, input, sum): # a=선택집합, k=선택한 수, input = 모든선택수
+    global min
+
+    if sum > min: return
+
     global MAXCANDIDATES
     c = [0] * MAXCANDIDATES
 
     if k == input: # k = 3 일 경우
-        process_solution(a, k) # k=3
+        process_solution(a, k, sum) # k=3
+        if sum < min:
+            min = sum
+            sum = 0
     else:
         k += 1  # k = 1 이 된다./ k = 2 / k = 3
         ncands = make_candidates(a, k, input, c) # ncands = 3 / 2 / 1
@@ -47,16 +55,16 @@ def backtrack(a, k, input): # a=선택집합, k=선택한 수, input = 모든선
                         # a집합의 k번째에 c[1] 를 넣어줌 a[1] = c[1] = 2/ a[2] = c[1] = 3
                         # a[1] = c[2] = 3
                         # a[3] = c[0] = 1
-            backtrack(a, k, input) # 재귀
+            backtrack(a, k, input, sum + table[k-1][a[k]-1]) # 재귀
 
 
 
-
+testcases = int(input())
 for T in range(testcases):
     N = int(input())
     table = []
     total = []
-    my_min = 99
+    min = 99999
     MAXCANDIDATES = 100
     NMAX = 100
     data = range(N + 1)
@@ -65,4 +73,5 @@ for T in range(testcases):
     for i in range(N): # 세로 : x , 가로 : y  테이블 생성
         tmp =list(map(int, input().split()))
         table.append(tmp)
-    backtrack(a, 0, N)
+    backtrack(a, 0, N, 0)
+    print("%s%d %d" % ('#', T+1, min))
