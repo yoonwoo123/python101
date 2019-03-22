@@ -410,6 +410,7 @@ pip install django-crispy-forms 로 설치
     <h1>글 수정</h1>
 {% endif %}
 
+{% crispy board_form %}
 <form method="POST">
     {% csrf_token %}
     {{ board_form|crispy }}
