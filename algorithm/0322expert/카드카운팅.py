@@ -7,39 +7,44 @@ for T in range(1, tc+1):
     dia = []
     heart = []
     clover = []
+    flag = 0
     cards = list(input())
-    S = [x for x in range(1, 14)]
-    D = [x for x in range(1, 14)]
-    H = [x for x in range(1, 14)]
-    C = [x for x in range(1, 14)]
+    S = 13
+    D = 13
+    H = 13
+    C = 13
     for i in range(0, len(cards), 3):
         if cards[i] == 'S':
             num = int(cards[i+1] + cards[i+2])
             if num in spade:
-                print('ERROR')
+                print('#{} ERROR'.format(T))
+                flag = 1
                 break
             spade.append(num)
-            S.pop(num-1)
+            S -= 1
         elif cards[i] == 'D':
             num = int(cards[i + 1] + cards[i + 2])
             if num in dia:
-                print('ERROR')
+                print('#{} ERROR'.format(T))
+                flag = 1
                 break
             dia.append(num)
-            D.pop(num - 1)
+            D -= 1
         elif cards[i] == 'H':
             num = int(cards[i + 1] + cards[i + 2])
             if num in heart:
-                print('ERROR')
+                print('#{} ERROR'.format(T))
+                flag = 1
                 break
             heart.append(num)
-            H.pop(num - 1)
+            H -= 1
         elif cards[i] == 'C':
             num = int(cards[i + 1] + cards[i + 2])
             if num in clover:
-                print('ERROR')
+                print('#{} ERROR'.format(T))
+                flag = 1
                 break
             clover.append(num)
-            C.pop(num - 1)
-    print(cards)
-    print(len(D))
+            C -= 1
+    if flag == 0:
+        print('#{} {} {} {} {}'.format(T, S, D, H, C))
