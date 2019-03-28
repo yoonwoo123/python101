@@ -18,7 +18,7 @@ def powerset(n, k, my_sum): # n :원소의 갯수, k : 현재 depth
         A[k] = 1 # k번 요소 o 숫자가 들어갈때만 그 데이터를 더해주므로 data[k]를 더해준다.
         powerset(n, k + 1, my_sum + data[k]) # 다음 요소 포함 여부 결정
         A[k] = 0 # k번 요소 x
-        powerset(n, k + 1, my_sum) # 다음 요소 포함 여부 결정
+        powerset(n, k + 1, my_sum) # 원래대로 돌리려면 더해준것을 없애야하므로 my_sum만
 
 total = 0
 count = 0
