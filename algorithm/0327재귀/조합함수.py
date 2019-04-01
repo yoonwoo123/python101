@@ -1,1 +1,0 @@
-def comb(n, r):
