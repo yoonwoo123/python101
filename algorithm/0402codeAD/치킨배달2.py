@@ -1,25 +1,20 @@
 import sys, itertools
 sys.stdin = open("치킨배달2_input.txt")
 
-def BFS():
-    que = []
-    for i in range(len(chicken)): # 치킨집 좌표를 que에 전부 넣는다.
-        que.append([chicken[i][0], chicken[i][1]], 0)
-    while que:
-        x, y, time = que.pop(0)
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if nx < 0 or nx >= N or ny < 0 or ny >= N: continue
+def comb(no, tot): # 현재 치킨집(행) 에서 모든 집을 가는 경우
+    global my_min
+    if tot >= my_min:
+        return
+    if no >= M:
+        if tot < my_min:
+            my_min = tot
+        return
+    for i in range(len(house)): # 집 (열)
+        if chk[i] == 1: continue
+        chk[i] = 1
+        comb(no + 1, tot + A[no][i])
+        chk[i] = 0
 
-            if arr[nx][ny] == 0:
-                arr[nx][ny] = time + 1
-                que.append([nx, ny, time + 1])
-            elif arr[nx][ny] == 1:
-                arr[nx][ny] = time + 1
-
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
 
 N, M = map(int, input().split())
 arr = []
@@ -33,7 +28,7 @@ for i in range(N):
 # 집좌표를 순열로 바꿔가면서 최소값을 찾는다.
 # 치킨집 = 2, 집 = 1
 
-# 2. 토마토 응용
+# 2. 토마토 응용 x
 # 어차피 모든집까지의 거리를 계산해야하므로 치킨집을 토마토로 생각
 # 각 집까지의 거리를 BFS로 찍어서 각 집까지 걸리는 시간을 저장한후
 # 각집에 저장된 시간값을 더해서 그중 최소를 찾는다.
@@ -46,5 +41,25 @@ for x in range(N):
             house.append([x, y])
         if arr[x][y] == 2:
             chicken.append([x, y])
+print(house)
+print(chicken)
+my_min = 999999999999999
+A = [[0 for _ in range(len(house))] for _ in range(len(chicken))] # 각 치킨집 [x] 에서 가정집 [y] 까지의 거리를 계산
+chk = [0] * len(house)
+# print(A)
 
+for x in range(len(chicken)): # 치킨 집을 행으로
+    for y in range(len(house)): # 열을 스택으로
+        dist = abs(house[y][0] - chicken[x][0]) + abs(house[y][1] - chicken[x][1])
+        A[x][y] = dist
+print(A)
+res = 0
+for i in A:
+    res += min(i)
+print(res)
+comb(0, 0)
+print(my_min)
+# itercomb = itertools.combinations(chicken, M)
+# for i in itercomb:
+#     print(i)
 

@@ -35,19 +35,20 @@ def comb(no):
     b[no] = 0
     comb(no + 1)
 
-def combs(no, start): # a[no]번째 구슬을 상자에 담거나 담지 않는 모든 경우
-    for i in range(N): print(b[i], end=" ")
-    print()
-    if no >= N or start >= N:
-        return
-    for i in range(start, N):
-        b[no] = a[i]
-        combs(no+1, i+1)
-        b[no] = 0
+# def combs(no, start): # a[no]번째 구슬을 상자에 담거나 담지 않는 모든 경우
+#     for i in range(N): print(b[i], end=" ")
+#     print()
+#     if no >= N or start >= N:
+#         return
+#     for i in range(start, N):
+#         b[no] = a[i]
+#         combs(no+1, i+1)
+#         b[no] = 0
 
 N = int(input())
 a = [n for n in range(1, 7)]
 b = [0] * N
 chk = [0] * N
 # DFS(0)
-comb(0)
+# comb(0)
+DFS(0)
