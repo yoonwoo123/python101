@@ -18,13 +18,12 @@ for T in range(tc):
         tree[pos][0] = numbers[i] # 값을 삽입
 
         while numbers[i] < tree[int(pos//2)][0]: # 삽입값 < 부모값
-            tree[pos][0] = tree[int(pos//2)][0] # 삽입값자리에 부모값이 들어감
-            tree[int(pos//2)][0] = numbers[i] # 부모값을 삽입으로바꿈
+            numbers[i], tree[int(pos//2)][0] = tree[int(pos//2)][0], numbers[i] # python의 swap 부모-자식을 스왑
             pos = int(pos // 2)
     pos = len(numbers)
     while pos != 0:
         res += tree[int(pos//2)][0]
         pos = int(pos // 2)
     print("%s%d %d" % ('#', T+1, res))
-    # printTree()
-    # print()
+    printTree()
+    print()

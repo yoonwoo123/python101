@@ -2,7 +2,6 @@ import sys
 sys.stdin = open("단지번호_input.txt")
 
 def BFS(x, y):
-    global N
     que = []
     que.append([x, y]) # 큐에 저장
     arr[x][y] = 0 # 방문처리

@@ -29,18 +29,31 @@ def perm(n, k):
             perm(n, k+1)
             a[i], a[k] = a[k], a[i]
 
+def DFS(no): # chk를 하면 순열 chk를 하지 않으면 중복순열
+    if no >= N:
+        for i in range(N):
+            print(b[i], end=" ")
+        print()
+        return
+    for i in range(6):
+        # if chk[i]:continue # 1이면 continue, 0이면 진행
+        # chk[i] = 1
+        b[no] = a[i]
+        DFS(no + 1)
+        # chk[i] = 0
+
+
+
 N, M = map(int, input().split())
 a = [n for n in range(1, 7)]
-p = [0] * N
+b = [0] * N
+chk = [0] * N
 
 if M == 1:
-    permu = itertools.combinations_with_replacement(a, 3)
-    for p in permu:
-        for i in p:
-            print(i, end=" ")
-        print()
+    DFS(0)
+
 elif M == 2:
-    combi = itertools.combinations_with_replacement(a, 3)
+    combi = itertools.combinations_with_replacement(a, N)
     for c in combi:
         for i in c:
             print(i, end=" ")
@@ -50,8 +63,8 @@ elif M == 2:
 
 
 elif M == 3:
-    combi = itertools.combinations(a, 3)
-    for c in combi:
+    permu = itertools.permutations(a, N)
+    for c in permu:
         for i in c:
             print(i, end=" ")
         print()

@@ -16,3 +16,4 @@ for T in range(1, tc+1):
         print("#%d overflow" % T)
     else:
         print("#%d %s" % (T, ''.join(map(str, total))))
+

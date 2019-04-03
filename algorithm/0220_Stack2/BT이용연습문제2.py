@@ -37,10 +37,12 @@ def backtrack(a, k, input, sum): # sum 추가
 MAXCANDIDATES = 100
 NMAX = 100
 # data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-data = range(11)
+data = range(7)
 a = [0] * NMAX
 cnt = 0
 total_cnt = 0
-backtrack(a, 0, 10, 0) # ,0 추가 (sum)
-print(f"count:{cnt}")
-print(f"total_count:{total_cnt}")
+backtrack(a, 0, 6, 0) # ,0 추가 (sum)
+# print(f"count:{cnt}")
+print("%s %d" % ('count:', cnt))
+# print(f"total_count:{total_cnt}")
+print("%s %d" % ('total_count:', total_cnt))

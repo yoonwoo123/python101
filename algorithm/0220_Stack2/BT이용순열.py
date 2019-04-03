@@ -1,8 +1,9 @@
 def process_solution(a, k): # 답을 출력하는 단계
+    global cnt
     for i in range(1, k+1): # i = [1,2,3]
         if a[i] : print(data[a[i]], end=" ")
     print()
-
+    cnt += 1
 def make_candidates(a, k, input, c):
     in_perm = [False] * NMAX # in_perm 은 [0] * 100 개 빈리스트 # visited의 뜻
 
@@ -18,7 +19,7 @@ def make_candidates(a, k, input, c):
     return ncands # 3 / 2 / 1
 
 def backtrack(a, k, input): # a=선택집합, k=선택한 수, input = 모든선택수
-    global MAXCANDIDATES
+    global MAXCANDIDATES, total_cnt
     c = [0] * MAXCANDIDATES
 
     if k == input: # k = 3 일 경우
@@ -32,9 +33,15 @@ def backtrack(a, k, input): # a=선택집합, k=선택한 수, input = 모든선
                         # a[1] = c[2] = 3
                         # a[3] = c[0] = 1
             backtrack(a, k, input) # 재귀
+    total_cnt += 1
 
 MAXCANDIDATES = 100
 NMAX = 100
-data = [0, 1, 2, 3]
+data = range(7)
 a = [0] * NMAX
-backtrack(a, 0, 3)
+cnt = 0
+total_cnt = 0
+backtrack(a, 0, 6)
+print("%s %d" % ('count:', cnt))
+# print(f"total_count:{total_cnt}")
+print("%s %d" % ('total_count:', total_cnt))

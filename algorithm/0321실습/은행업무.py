@@ -1,5 +1,7 @@
 import sys
 sys.stdin = open('은행업무_input.txt')
+# 강사님은
+# 이진수면 2로 나눈 나머지 값 삼진수면 3으로 나눈 나머지값을 사용했다.
 
 tc = int(input())
 ott = ['0', '1', '2']

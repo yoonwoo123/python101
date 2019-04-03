@@ -1,39 +1,38 @@
 import sys
 sys.stdin = open("최소의합_input.txt")
 
-def DFS(no, nsum):
-    global sol
-    if nsum > sol: # 가지치기
+def perm(n, k, tot):
+    global my_min
+    if my_min <= tot:
         return
-    if no >= N:
-        # for i in range(N):
-        #     print(rec[i], end=" ")
-        #     print(nsum)
-        if nsum < sol:
-            sol = nsum
-        return
+    if n == k:
+        tot = 0
+        for x in range(N):
+            tot += arr[x][a[x]]
+        if my_min > tot:
+            # print(a)
+            my_min = tot
+            # print(my_min)
+    else:
+        for i in range(k, n):
+            a[i], a[k] = a[k], a[i]
+            perm(n, k+1, tot + arr[k][a[k]])
+            a[i], a[k] = a[k], a[i]
 
-        # 현재 행에 모든 열의 수를 고르는 경우의 수 시도
-        for i in range(N): # 열요소
-            if chk[i] == 1: # 체크가 되어있으면 생략하고 다음숫자로 넘어감 ex) 1이 체크되어있으면 2로 넘어감
-                continue
-            chk[i] = 1 # 체크해줌
-            rec[no] = arr[no][i]
-            DFS(no + 1, nsum + arr[no][i])
-            chk[i] = 0 # 체크 품
 
 N = int(input())
 arr = []
-chk = [0] * 11 # 열의 중복을 체크할 배열
-rec = [0] * 11 # 조합된 결과를 기록할 배열
-
+a = [n for n in range(N)]
+my_min = 99999999999999
+easymin = 0
 for i in range(N):
     arr.append(list(map(int, input().split())))
+for i in range(N):
+    easymin += min(arr[i])
+perm(N, 0, 0)
 # 1] 첫번째 방법: 열의 중복허용한 순열
-sol = 100000
-
-
-
+print(easymin)
+print(my_min)
 
 
 
