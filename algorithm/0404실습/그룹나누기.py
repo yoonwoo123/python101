@@ -16,8 +16,6 @@ for T in range(1, tc+1):
         p1 = find(arr[i*2])
         p2 = find(arr[i*2 + 1])
         p[p2] = p1
-    # print(p)
-    res = set()
     for i in range(1, N+1):
-        res.add(find(p[i]))
-    print('#%d %d' % (T, len(res)))
+        p[i] = find(p[i])
+    print('#%d %d' % (T, len(set(p))-1))
