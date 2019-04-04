@@ -15,9 +15,9 @@ def union(x, y):
 
 def mst_KRUSKAL():
     global V
-    cnt = 0
-    tot = 0
-    i = 0
+    cnt = 0 # 간선갯수
+    tot = 0 # 가중치의 합
+    i = 0   # 제어변수
     while cnt < V: # V 개의 간선을 선택
         p1 = findset(arr[i][0]) # arr[i][0]의 부모를 찾아가라
         p2 = findset(arr[i][1]) # arr[i][1]의 부모를 찾아가라
