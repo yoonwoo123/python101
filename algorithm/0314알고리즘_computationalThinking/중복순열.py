@@ -3,7 +3,8 @@ def myprint(q):
         q = q - 1
         print(" %d " % (t[q]), end = "")
     print()
-def perm(n, r, q):
+
+def perm(n, r, q): # N , r 뽑고자 하는 갯수 , q = r과 같은수
     if r== 0:
         myprint(q)
     else:

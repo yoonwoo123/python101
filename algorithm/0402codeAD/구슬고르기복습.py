@@ -18,19 +18,19 @@ def DFS3(n): # 순열
         return
     for i in range(1, 7):
         if chk[i]:continue
-        chk[i]=1
+        chk[i]=1 # 순열은 체크 해야함
         arr[n]=i
         DFS3(n+1)
-        chk[i]=0
+        chk[i]=0 # 순열은 체크해제도 해야함
 
 def DFS2(n, start): # 중복조합
     if n>N:
         for i in range(1, N+1): print(arr[i], end=' ')
         print()
         return
-    for i in range(start, 7):
+    for i in range(start, 7): # 시작은 스타트부터
         arr[n]=i
-        DFS2(n+1, i)
+        DFS2(n+1, i) # 스타트업데이트는 start가 아닌 i
 
 def DFS4(n, start): # 조합
     if n>N:
@@ -39,7 +39,7 @@ def DFS4(n, start): # 조합
         return
     for i in range(start, 7):
         arr[n]=i
-        DFS4(n+1, i+1)
+        DFS4(n+1, i+1) # 조합은 i 가 아닌 i + 1 중요!
 
 
 #main---------------------------------

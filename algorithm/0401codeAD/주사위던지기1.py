@@ -6,17 +6,19 @@ sys.stdin = open("주사위던지기1_input.txt")
 # M3 = 순열 구조
 # M4 가 있다면 조합 구조 : start + 1 부터 시작하면됨
 
-def ovperm(n, k):
-    if n == k:
-        for g in p:
-            print(g, end=" ")
+def ovperm(n):
+    if n >= N:
+        for g in range(N):
+            print(a[g], end=" ")
         print()
-    else:
-        for i in range(k, n):
-            p[k] = a[i]
-            perm(n, k+1)
-            perm(n-1, k+1)
-            # a[i], a[k] = a[k], a[i]
+        return
+    for i in range(6):
+        # p[k] = a[i]
+        # a[i], a[k] = a[k], a[i]
+        a[n] = i
+        ovperm(n + 1)
+        # ovperm(n, k+1)
+        # a[i], a[k] = a[k], a[i]
 
 def perm(n, k):
     if n == k:
@@ -42,30 +44,36 @@ def DFS(no): # chk를 하면 순열 chk를 하지 않으면 중복순열
         DFS(no + 1)
         # chk[i] = 0
 
+N = 3
+a = [0] * N
+print(a)
+print(a[1])
+p = [0] * 6
+ovperm(0)
 
 
-N, M = map(int, input().split())
-a = [n for n in range(1, 7)]
-b = [0] * N
-chk = [0] * N
+# N, M = map(int, input().split())
+# a = [n for n in range(1, 7)]
+# b = [0] * N
+# chk = [0] * N
 
-if M == 1:
-    DFS(0)
+# if M == 1:
+#     DFS(0)
 
-elif M == 2:
-    combi = itertools.combinations_with_replacement(a, N)
-    for c in combi:
-        for i in c:
-            print(i, end=" ")
-        print()
-    # ovperm(N, 0)
-    # print(1)
-
-
-elif M == 3:
-    permu = itertools.permutations(a, N)
-    for c in permu:
-        for i in c:
-            print(i, end=" ")
-        print()
+# elif M == 2:
+#     combi = itertools.combinations_with_replacement(a, N)
+#     for c in combi:
+#         for i in c:
+#             print(i, end=" ")
+#         print()
+#     # ovperm(N, 0)
+#     # print(1)
+#
+#
+# elif M == 3:
+#     permu = itertools.permutations(a, N)
+#     for c in permu:
+#         for i in c:
+#             print(i, end=" ")
+#         print()
 
