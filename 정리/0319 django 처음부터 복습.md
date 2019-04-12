@@ -265,7 +265,9 @@ from django.urls import reverse # 중요!
 
     def get_absolute_url(self):
         return reverse('boards:detail', args=[self.pk])
-   
+		# reverse를 씀으로써 url을 거꾸로 찾아가 제대로 된 경로를 찾아준다.
+
+    
 그 후 views.py 에 create 부분
 return redirect(board) 으로 바꿔도 이용가능
 
