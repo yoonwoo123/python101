@@ -23,8 +23,6 @@ typeof Infinity
 "number"
 typeof []
 "object"
-typeof () => {}
-VM286:1 Uncaught SyntaxError: Malformed arrow function parameter list
 typeof {}
 "object"
 typeof [1, 2, 3]
@@ -247,7 +245,118 @@ answerCapital: function(answer) {
 
 
 
-### todo_html ()
+### 02_todo_html 
+
+```html
+<body>
+    <div id="app">
+        <!-- v-model : data의 newTodo 값이 사용자가 입력하는 값으로 변경됨.-->
+        <input type="text" v-model="newTodo" v-on:keyup.enter="addNewTodo"><br>
+        {{ newTodo }}
+        <button @click="allComplete">[전부 완료]</button>
+        <select v-model="status">
+            <option value="all">모두보기</option>
+            <option value="completed">완료</option>
+            <option value="active">할 일</option>
+        </select>
+
+        <ul>
+            <!-- v-for가 우선, v-if가 나중 | 그래야 for에서 하나씩 나오며 if를 해주기 때문이다. -->
+            <!-- <li v-for="todo in todoList" v-if="!todo.completed"> -->
+            <li v-for="todo in todoListByStatus()" v-bind:key="todo.id">
+                <input type="checkbox" v-model="todo.completed">
+                <span :class="{completed: todo.completed}">{{ todo.content }}</span>
+                <!-- <button v-on:click='complete(todo)'>[완료]</button> -->
+            </li>
+            <!-- <li v-else> -->
+                <!-- <input type="checkbox" v-model="todo.completed"> -->
+                <!-- <del>{{ todo.content }}</del>> -->
+            <!-- </li> -->
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const STORAGE_KEY = 'vue-todo-list'
+        const todoStorage = {
+            fetch: function() {
+                const todoList = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+                todoList.forEach( function(todo, index) {
+                    todo.id = index
+                })
+                return todoList
+            },
+            save: function(todoList) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(todoList))
+            }
+        }
+        const app = new Vue({
+            el: '#app',
+            data: {
+                newTodo: '',
+                status: 'all',
+                todoList: todoStorage.fetch()
+            },
+            methods: {
+                complete: function(todo) {
+                    todo.completed = !todo.completed // true -> false , false -> true 로
+                },
+                addNewTodo: function() {
+                    // this : Vue 오브젝트(app)
+                    // this.todoList : data의 todoList
+                    if (this.newTodo) {
+                        this.todoList.push({
+                            // this.newTodo : data의 newTodo (사용자가 입력을 한 값)
+                            id: new Date(),
+                            content: this.newTodo,
+                            completed: false
+                        })
+                        this.newTodo = ""
+                    }
+                },
+                allComplete: function(){
+                    // this.todoList.forEach(todo => {  // 이렇게 arrow로 해서 check함수로
+                    //    if (!todo.completed) {        // 확인할 수 있으나 아직은 이해만하는걸로
+                    //        this.check(todo)
+                    //    }
+                    //})
+                    this.todoList.forEach(function(todo){
+                        todo.completed = true
+                })
+                },
+                todoListByStatus: function() {
+                    // 각각을 확인하면서 status completed라면,
+                    // completed가 true만 리턴
+                    if (this.status === 'completed') {
+                        return this.todoList.filter((todo) => todo.completed)
+                    } else if (this.status === 'active') {
+                        // s각각을 확인하면서 status가 active라면,
+                        // completed가 false인 것만 리턴
+                        return this.todoList.filter((todo) => !todo.completed)
+                    } else {
+                        // all이면
+                        // 그대로 리턴
+                        return this.todoList
+                    }
+                        
+                }
+            } 
+            , watch: {
+                todoList: {
+                    handler: function() {
+                    // 로컬 스토리지에 저장하겠습니다. 
+                        todoStorage.save(this.todoList)
+                    },
+                    deep: true 
+                    // deep true가 없다면, 단순히 해당하는 오브젝트([])에 값이 추가되거나 삭제 되는 경우만 watch
+                    // deep true 옵션을 통해 오브젝트([]) 안에 있는 오브젝트(nested object)의 변경 사항까지 watch
+                }
+            }    
+        })
+    </script>
+</body>
+```
+
+
 
 filter는 검사해서 true인 것들만 모아준다.
 
@@ -260,3 +369,42 @@ arrow 에서 this 를 쓰면 상위로 간다.
 일반함수에서 this 를 쓰면 window
 
 json은 오브젝트가 아닌 문자열이다 !!!!
+
+
+
+Vue 가 10문제 JS 가 15문제
+
+* 뚱이문제 === 과 == 구별 1문제
+
+* 2. Event Listener 에서 객관식 1문제 
+
+* 다음에 해당하는 Directive 고르기 1문제
+
+* ```
+  typeof NaN  
+  'number'
+  typeof undefined
+  'undefined'
+  NaN === NaN
+  false
+  1 + '1'
+  '11'
+  1 * '1'
+  1
+  typeof null
+  'object'
+  ```
+
+* JS 는 싱글쓰레드인데 멀티쓰레드처럼 보이는 이유는 non-blocking 때문이다.
+
+* 엑시오스 쓰는 이유 파이썬과 다르기 때문(non-blocking)이고 
+
+  반환은 promise 객체를 반환한다.
+
+* `arrow function` vs `function` : this 의 차이
+
+* array helper method 꼭 보기 filter, forEach, map, for of
+* appendChild는 node만 인자로 받을 수 있다.
+* method 정의나 eventlistener 에서는 arrow 함수를 쓰지 말자
+
+* method 안에서의 콜백함수에는 arrow쓸 수  있다.(써야만 한다)
