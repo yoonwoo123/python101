@@ -9,17 +9,22 @@
 <body>
     <h1>37workshop</h1>
     <button id="req">요청 보내기</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        const test = function() {
-            axios.get('http://13.125.249.144:8080/ssafy/daejeon/1/posts')
+        const URL = 'http://13.125.249.144:8080/ssafy/daejeon/1/posts'
+        axios.get(URL)
+        .then(response => {
+            console.log(response)
+        })
+        const data = {post: {title: 'hi', content:' hihi', author:'youngwoo'}}
+
+        axios.post(URL, data)
             .then(response => {
                 console.log(response)
-                return response})
-        }
-
+            })
         // 버튼을 누르면 이미지가 나오도록
-        const reqbt = document.querySelector('#req')
-        reqbt.addEventListener('click', test)
+        //const reqbt = document.querySelector('#req')
+        //reqbt.addEventListener('click', test)
     </script>
 </body>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="getDogImage">댕댕이 {{ dogCount }} 마리~ </button><br>
+        <img 
+            v-for="image in images"
+            v-bind:src="image"
+        >   
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const getDogImage = function() {
+            axios.get('https://dog.ceo/api/breeds/image/random')
+                .then( response => {
+                    this.images.push(response.data.message)
+                    this.dogCount += 1 // 강아지 이미지가 추가될때마다 카운트 += 1
+                })
+        }
+        const app = new Vue({
+            el: '#app',
+            data: {
+                images: [],
+                dogCount: 0 // 1. data에 추가하고 싶은 값을 담고
+            },
+            methods: {
+                getDogImage
+            }
+        })    
+    </script>
+</body>
+</html>
