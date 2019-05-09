@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h1> 노래 목록 </h1>
+        <div v-for="music in musics">
+            <h2>{{ music.id }}. {{ music.artist_name }} : {{ music.title }}</h2>
+            <ul>
+                <div v-for="comment in music.comment_set">
+                    <li>댓글 : {{ comment.content }}<button @click="deleteComment(music, comment)">삭제</button></li>
+                </div>
+            </ul>
+            <p>댓글 : <input v-model="music.newComment" @keyup.enter="addnewComment(music)"></p>
+            <hr>
+        </div>
+
+    </div>
+
+
+    <script>
+        const app = new Vue ({
+            el: "#app",
+            data: {
+                musics: {
+                }
+            },
+            // 새로고침하면 실행 됨.
+            mounted: function() {
+                this.getMusics()
+            },
+            methods: {
+                getMusics : function() {
+                    const djangoUrl = "http://django-intro-injeong.c9users.io:8080/api/v1/musics/"
+                    // axios를 통한 요청은 promise 객체를 리턴
+                    axios.get(djangoUrl)
+                        // resolve 되면 (성공하면), then으로 처리
+                        .then(response => {
+                            this.musics = response.data.map((music) =>{
+                                // music을 받아서 각 music마다 newComment를 빈 공간으로 붙인다.
+                                return {...music, newComment:''}
+                            })
+                            
+                        })
+                        // 반드시 에러메세지 해주세요!
+                        // reject 되면 (실패하면), catch로 처리
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    
+                },
+                addnewComment: function(music) {
+                    const musicId = music.id
+                    // django라면 form에서 받아서 저장할 정보 == data
+                    const data = {'content': music.newComment}
+                    axios.post(`http://django-intro-injeong.c9users.io:8080/api/v1/musics/${musicId}/comments/`, data)
+                        .then(response => {
+                            music.comment_set.push(response.data),
+                            music.newComment = ''
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        })
+                    
+                },
+                deleteComment: function(music, comment) {
+                    const musicId = music.id
+                    const commentId = comment.id
+                    axios.delete(`http://django-intro-injeong.c9users.io:8080/api/v1/musics/${musicId}/comments/${commentId}/`)
+                        .then(
+                            music.comment_set.pop()
+                        )
+                        .catch((error) => {
+                            console.log(error)
+                        })
+                }
+            }
+        })
+
+    </script>
+
+</body>
+</html>
