@@ -17,7 +17,7 @@
 >
 > `git checkout master` 로 마스터브랜치로 돌아가면 만든게 저절로 사라짐
 >
-> git diff yoon 을 하면 지운다(독립).
+> git diff yoon 을 하면 두 커밋이나 디렉토리의 변경점을 보여준다.
 >
 > git merge yoon 을 하면 마스터와 병합한다.
 >
@@ -66,3 +66,4 @@
 > github 에서 병합을 할 때 branch에서 master 에게 pull request 를 보내서 
 >
 > master 가 마음에 들면 병합을 할 수 있다. 병합의 과정도 커밋처럼 기록이 남는다.
+

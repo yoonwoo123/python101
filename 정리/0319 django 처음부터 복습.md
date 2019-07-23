@@ -398,6 +398,9 @@ git commit -m '11|form.html 분기|'
 ```bash
 pip freeze > requirements.txt	# freeze 해서 txt파일에 현재 사용버전이 저장됨
 
+후에 다른 가상환경에서 사용할 시 개발환경을 맞춰주려면
+pip install -r requirements.txt 하면 동일한 pip이 전부 설치된다.
+
 pip install django-crispy-forms 로 설치
 그 후 settings.py 에 # app등록 꼭 해주기
 
