@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>참거짓</h1>
+    <script>
+    
+        const answers = [
+        {
+            name: '보기',
+            number: '0'
+        },
+        {
+            name: '보기',
+            number: '1'
+        },
+        {
+            name: '보기',
+            number: '2'
+        },
+        {
+            name: '보기',
+            number: '3'
+        },
+        ]
+
+        const tf = [
+            {
+                name: '참',
+                number: -1
+            },
+            {
+                name: '거짓',
+                number: -1
+            }
+        ]
+
+        const quiz = [
+        {
+            name: "오매불망",
+            info:{
+            id: 1,
+            genre: "사자성어",
+            meaning: "자나깨나 잊지 못함"
+            }
+        },
+        {
+            name: "죽마고우",
+            info:{
+            id: 2,
+            genre: "사자성어",
+            meaning: "'대나무 말을 타고 놀던 옛 친구'라는 뜻으로, 어릴 때부터 가까이 지내며 자란 친구를 이르는 말"
+            }
+        },
+        {
+            name: "대기만성",
+            info:{
+            id: 3,
+            genre: "사자성어",
+            meaning: "큰 그릇은 늦게 이루어진다는 뜻으로, 크게 될 인물은 오랜 공적을 쌓아 늦게 이루어짐을 이름"
+            }
+        },
+        {
+            name: "낙화유수",
+            info:{
+            id: 4,
+            genre: "사자성어",
+            meaning: "떨어지는 꽃과 흐르는 물이라는 뜻으로, 남녀 간 서로 그리워하는 애틋한 정을 이르는 말"
+            }
+        },
+        {
+            name: "구곡간장",
+            info:{
+            id: 5,
+            genre: "사자성어",
+            meaning: "굽이굽이 서린 창자라는 뜻으로, 깊은 마음속 또는 시름이 쌓인 마음속을 비유적으로 이르는 말"
+            }
+        },
+        {
+            name: "전전반측",
+            info:{
+            id: 6,
+            genre: "사자성어",
+            meaning: "이리 뒤척 저리 뒤척 한다는 뜻으로, 원래는 미인을 사모(思慕)하여 잠을 이루지 못함을 이르는 표현"
+            }
+        }
+        ]
+
+        var generateRandom = function (min, max) {
+        var ranNum = Math.floor(Math.random()*(max-min));
+            return ranNum;
+        }
+
+        const go = generateRandom(0,quiz.length)// 랜덤수
+        console.log(quiz[go]['info']['meaning'] )// 랜덤으로 뽑힌 문제
+
+        var arr = [quiz[go]['name']] // 답은 무조건 앞에 그 뒤에 랜덤한 것
+        while (true){
+            var two = generateRandom(0,quiz.length) // 새로만든 랜덤수
+            // console.log(go)
+            // console.log(two)
+            if (go !== two){
+                break;
+            }
+        }
+        arr.push(quiz[two]['name'])
+        console.log(arr)
+        var two = generateRandom(0,2)
+        console.log(`${arr[two]}이(가) 문제로 나옵니다.`)
+        if (arr[two] === quiz[go]['name']){
+            console.log('참일때 correct 입니다.')
+        } else {
+            console.log('거짓일때 correct 입니다.')
+        }
+
+    </script>
+</body>
+</html>

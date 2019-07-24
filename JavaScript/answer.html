@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>보기</h1>
+    <script>
+    
+        const answers = [
+        {
+            name: '보기',
+            number: '0'
+        },
+        {
+            name: '보기',
+            number: '1'
+        },
+        {
+            name: '보기',
+            number: '2'
+        },
+        {
+            name: '보기',
+            number: '3'
+        },
+        ]
+
+        const quiz = [
+        {
+            name: "오매불망",
+            info:{
+            id: 1,
+            genre: "사자성어",
+            meaning: "자나깨나 잊지 못함"
+            }
+        },
+        {
+            name: "죽마고우",
+            info:{
+            id: 2,
+            genre: "사자성어",
+            meaning: "'대나무 말을 타고 놀던 옛 친구'라는 뜻으로, 어릴 때부터 가까이 지내며 자란 친구를 이르는 말"
+            }
+        },
+        {
+            name: "대기만성",
+            info:{
+            id: 3,
+            genre: "사자성어",
+            meaning: "큰 그릇은 늦게 이루어진다는 뜻으로, 크게 될 인물은 오랜 공적을 쌓아 늦게 이루어짐을 이름"
+            }
+        },
+        {
+            name: "낙화유수",
+            info:{
+            id: 4,
+            genre: "사자성어",
+            meaning: "떨어지는 꽃과 흐르는 물이라는 뜻으로, 남녀 간 서로 그리워하는 애틋한 정을 이르는 말"
+            }
+        },
+        {
+            name: "구곡간장",
+            info:{
+            id: 5,
+            genre: "사자성어",
+            meaning: "굽이굽이 서린 창자라는 뜻으로, 깊은 마음속 또는 시름이 쌓인 마음속을 비유적으로 이르는 말"
+            }
+        },
+        {
+            name: "전전반측",
+            info:{
+            id: 6,
+            genre: "사자성어",
+            meaning: "이리 뒤척 저리 뒤척 한다는 뜻으로, 원래는 미인을 사모(思慕)하여 잠을 이루지 못함을 이르는 표현"
+            }
+        }
+        ]
+
+        var generateRandom = function (min, max) {
+        var ranNum = Math.floor(Math.random()*(max-min));
+            return ranNum;
+        }
+
+//    return된 ranNum번호의 quiz배열안의 딕셔너리 인덱스 안의 name(정답)을 가져와서 
+//    answers 배열에 랜덤하게 넣는다. 
+//    그 외 나머지 보기는 quiz 배열안 딕셔너리 안의 name이 정답과 같지 않으면 넣어준다.
+        var go = generateRandom(0,quiz.length)
+        var a = Math.floor(Math.random()*4)
+        answers[a]['name'] = quiz[go]['name']
+        var check = [-1, -1, -1, -1]
+        check[a] = go
+
+        for (let i=0; i < 4; i++){     
+            while (true){
+                var flag = 0
+                var g = generateRandom(0,quiz.length)
+                for (var x of check) { // 중복방지
+                    if (x === g){
+                        flag = 1
+                        break;
+                    }
+                if (flag === 0){
+                    break;
+                }
+                }   
+            }
+            check[i] = g
+            if (answers[i]['name'] === '보기' ){
+                answers[i]['name'] = quiz[g]['name']
+            }
+        }
+
+    </script>
+</body>
+</html>
