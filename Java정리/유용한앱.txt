@@ -1,0 +1,1 @@
+sourcetree라는 무료 툴을 쓰면 git commit 진행상황과 어떤것이 수정됬는지 잘 알 수 있다.
